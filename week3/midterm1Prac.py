@@ -35,3 +35,7 @@ def wave_type(wave_parameters):
     else:
         return "Surging or collapsing"
     
+def test ():
+    num = 35
+    return num == 35
+
