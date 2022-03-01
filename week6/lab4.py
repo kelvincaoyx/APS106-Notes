@@ -28,10 +28,15 @@ def heat_control_hysteresis_thresh(temp_measured, current_state, temp_desired, a
     
     # TODO Write your code here
     
+    #checks to see if the temp is low enough to turn on heater
     if temp_measured < (temp_desired - alpha):
         return True
+    
+    #checks if temp is high enough to turn off heater
     elif temp_measured > (temp_desired + alpha):
         return False
+    
+    #if the temp is not too high or low, we can keep the same state, it is in the desired range
     else:
         return current_state
 
@@ -52,9 +57,14 @@ def newton_raphson_sqrt(n, epsilon):
     1.417
 
     """
+    #defines a variable that changes every interation
     current_x_value = n
+    
+    #checks if the variable has a low enough error
     while abs(current_x_value**2 - n) > epsilon:
         current_x_value = 0.5*(current_x_value + n/current_x_value)
+    
+    #retusn the value that is within tolerance amount
     return round(current_x_value,3)
     
 
@@ -98,16 +108,27 @@ def thresh_crossing_counter(temp_desired, hyst_alpha,
     state = get_sensor_measurement(t_start,c0,c1,c2,c3,c4) <= temp_desired 
     
     # TODO Write your code to complete the function here
-    current_time = t_start
+    
+    #defines counter
     heater_changes = 0
 
-    while current_time < t_stop:
+    #checks if the current time has reached the end time
+    while t_start <= t_stop:
+        #makes the state = to the past state
         past_state = state
-        temp_measured = get_sensor_measurement(current_time,c0,c1,c2,c3,c4)
+        
+        #measures the current temp
+        temp_measured = get_sensor_measurement(t_start,c0,c1,c2,c3,c4)
+        
+        #checks the current state
         state = heat_control_hysteresis_thresh(temp_measured,past_state,temp_desired, hyst_alpha)
+        
+        #adds to counter if the current state and past state aren't the same
         if state != past_state:
             heater_changes += 1
-        current_time += t_step
+            
+        #increments the time after each loop
+        t_start += t_step
         
     return heater_changes
             
