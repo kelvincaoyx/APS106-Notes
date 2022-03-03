@@ -113,19 +113,19 @@ def thresh_crossing_counter(temp_desired, hyst_alpha,
     heater_changes = 0
 
     #checks if the current time has reached the end time
-    while t_start <= t_stop:
-        #makes the state = to the past state
-        past_state = state
-        
+    t_start += t_step
+    while t_start <= t_stop:        
         #measures the current temp
         temp_measured = get_sensor_measurement(t_start,c0,c1,c2,c3,c4)
         
         #checks the current state
-        state = heat_control_hysteresis_thresh(temp_measured,past_state,temp_desired, hyst_alpha)
+        next_state = heat_control_hysteresis_thresh(temp_measured,state,temp_desired, hyst_alpha)
         
         #adds to counter if the current state and past state aren't the same
-        if state != past_state:
+        if state != next_state:
             heater_changes += 1
+        
+        state = next_state
             
         #increments the time after each loop
         t_start += t_step
