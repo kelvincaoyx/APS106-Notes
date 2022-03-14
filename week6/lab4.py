@@ -114,7 +114,7 @@ def thresh_crossing_counter(temp_desired, hyst_alpha,
 
     #checks if the current time has reached the end time
     t_start += t_step
-    while t_start <= t_stop:        
+    while t_start < t_stop:        
         #measures the current temp
         temp_measured = get_sensor_measurement(t_start,c0,c1,c2,c3,c4)
         

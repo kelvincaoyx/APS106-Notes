@@ -18,10 +18,12 @@ def email_to_name(email):
     >>> email_to_name("anna.conda@mail.utoronto.ca")
     'CONDA,ANNA'
     """
-    
     ## TODO: YOUR CODE HERE
-
-
+    name_section = email.split("@")[0]
+    first_name = name_section.split(".")[0]
+    last_name = name_section.split(".")[1]
+    return (last_name + "," + first_name).upper()
+    
 
 ###############################
 # Part 2 - Count Measurements #
@@ -42,7 +44,7 @@ def count_measurements(s):
     """
     
     #TODO: YOUR CODE HERE
-
+    return len(s.replace(" ","").split(","))//2
 
 
 ######################################
@@ -63,7 +65,15 @@ def calc_site_average(measurements, site):
     """
     
     ## TODO: YOUR CODE HERE
-
+    site_list = measurements.replace(" ","").split(",")
+    num_total = 0
+    num_counter = 0
+    for i in range(len(site_list)):
+        if site_list[i] == site:
+            num_counter += 1
+            num_total += float(site_list[i+1])
+            
+    return round(num_total/num_counter,1)
     
 
 
@@ -90,8 +100,16 @@ def generate_summary(measurement_info, site):
     """
     
     ## TODO: YOUR CODE HERE
+    entire_list = measurement_info.replace(" ","").split(",")
+    
+    return_list = []
+    
+    return_list.extend(email_to_name(entire_list[0]).split(","))
+    return_list.append(str(count_measurements(",".join(entire_list[2:]))))
+    return_list.append(str(calc_site_average(",".join(entire_list[2:]),site)))
+    return ",".join(return_list)
 
 
-
-
-## TODO: YOUR TEST CODE HERE - REMEMBER TO DELETE THESE LINES BEFORE SUBMITTING
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
