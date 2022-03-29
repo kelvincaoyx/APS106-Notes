@@ -74,20 +74,11 @@ def deal_card(deck,hand):
 
 #deal_card([['spades', 10], ['hearts', 2], ['clubs', 8]], [['diamonds', 3]])
 
-'''
-from itertools import combinations
-lst = ["1h","2s","2d","3h","3s"]
-combos_of_two = list(combinations(lst, 2)) # returns list of all n choose 2 combinations
-combos_of_three = list(combinations(lst, 3)) # returns list of all n choose 3 combinations
-print(combos_of_three)
-#print(combos_of_two)
 
-'''
 #############################
 # PART 2 - Score Hand
 #############################
 
-from itertools import combinations
 
 def score_hand(hand):
     """
@@ -107,27 +98,16 @@ def score_hand(hand):
     combosOfThree = list(combinations(hand,3))
     combosOfFour = list(combinations(hand,4))
 
-
+    #print(combosOfTwo)
     for combination in combosOfTwo:
+        #print(combination)
         if combination[0][1] == combination[1][1]:
             totalPointsFromRule1 += 2
     
     #print("rule 1",totalPointsFromRule1)
     
     totalPointsForRule2 = 0
-    '''
-    rule2Counter = 0
-    firstSuit = hand[0][0]
-    for suit in hand:
-        if suit[0] == firstSuit:
-            rule2Counter += 1
-    
-    if rule2Counter == 4:
-        totalPointsForRule2 += 4
-       
-    if rule2Counter == 5:
-        totalPointsForRule2 += 5
-    '''
+
     suitsDic = {'diamonds':0, 'hearts':0, 'clubs':0, 'spades':0}
     for card in hand:
         card = card[0]
@@ -135,7 +115,6 @@ def score_hand(hand):
 
         suitsDic.update({card : currentValue})
         
-    
     #print(suitsDic)
     for suits in suitsDic:
         if suitsDic.get(suits) == 5:
@@ -170,6 +149,7 @@ def score_hand(hand):
         for i in range(1,11):
             tempSet = set([i,i+1,i+2,i+3])
             combos.append(tempSet)
+        #print(combos)
 
         #print(combos)
         combosOfFourNum = []
@@ -259,13 +239,9 @@ def score_hand(hand):
     
     #print("final", finalCounter)
     return finalCounter
-#deal_card([['spades', 10], ['hearts', 2], ['clubs', 8]], [['diamonds', 3]])
+
+score_hand([['diamonds', 6], ['clubs', 2], ['clubs', 11], ['hearts', 2], ['clubs', 3], ['hearts', 6], ['diamonds', 5], ['clubs', 9], ["spades", 6], ['diamonds', 9]])
  
-hand1 = [['spades', 3], ['diamonds', 4], ['diamonds', 5], ['diamonds', 6], ['diamonds', 9]]
-
-score_hand(hand1)
-
-
 ################################
 # PART 3 - PLAY
 ################################
@@ -286,7 +262,7 @@ def play(shuffled_deck):
     
     # TODO complete the function
 
-    for num in range(1,12):
+    for num in range(1,11):
         if num % 2 != 0:
             deal_card(shuffled_deck, dealer_hand)
         else:
