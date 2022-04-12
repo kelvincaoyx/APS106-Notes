@@ -158,10 +158,6 @@ def kernel_filter(img, width, height, kernel):
     for i in range(width*height):
         end_array.append(0)
     
-    
-    
-    
-    
     #print(N)
     
     #U know the x and y coordinated that i said i needed to determine the values for?
@@ -294,6 +290,8 @@ def non_maxima_suppression(corners, min_distance):
     for coord in corners:
         #print("f",F)
         #print("coord",coord)
+        
+        #flag that we will use later
         flag = True
         
         #in this loop, we are going to test the corner to all the F in that array
