@@ -1,0 +1,20 @@
+Node A
+Node B
+Node C
+Node D
+Node E
+Node F
+Node G
+Node H
+Edge 1 A C
+Edge 1 A B
+Edge 1 A D
+Edge 11 C F
+Edge 11 C D
+Edge 9 B D
+Edge 8 D F
+Edge 10 D E
+Edge 14 F H
+Edge 8 F G
+Edge 4 E G
+Edge 7 G H
