@@ -81,6 +81,9 @@ None
 # n = Node(1, Node(2, Node(3, Node(4, Node(5)))))
 # print_special(n, True)
 
+
+
+
 def stopping_criteria(num):
     if num == 6:
         return True
@@ -125,11 +128,14 @@ class NodeBT:
         ''' (NodeBT) -> num
         Returns the sum of the cargo values of all the nodes in the binary 
         tree that is rooted at self.
-        Precondition: All nodes have cargo values that are integers.'''    
+        Precondition: All nodes have cargo values that are integers.
+        '''    
+        
         final = 0
         level = [self]
         
         while len(level) > 0:
+            
             level_next = []
             
             for node in level:
@@ -140,35 +146,32 @@ class NodeBT:
                     level_next.append(node.right)
             
             level = level_next
-        
         return final
+    
+    
     
     def print_tree(self):
         level = [self]
-        
         while len(level) > 0:
             
             level_next = []
             
             for node in level:
-                
                 print(node.cargo, " ", end = "")
                 
                 if node.left is not None:
                     level_next.append(node.left) 
-                
                 if node.right is not None:
                     level_next.append(node.right)
-                
-                    
             print('\n')
             level = level_next
-                
 
-# t = NodeBT(1, NodeBT(2), NodeBT(3, NodeBT(4)))
-# print(t.sum_all_nodes())
 
-#t.print_tree()
+t = NodeBT(1, NodeBT(2), NodeBT(3, NodeBT(4)))
+
+print(t.sum_all_nodes())
+
+t.print_tree()
 
 
 class BinaryTree:
@@ -191,23 +194,33 @@ def tree_merge(new_root, t1, t2):
     new_root.left = t1.root
     new_root.right = t2.root
     new_tree = BinaryTree(new_root)
+    
+    t1.root = None
+    t2.root = None
+    
     return new_tree
 
-# r1 = NodeBT(2, NodeBT(1), NodeBT(3))
-# t1 = BinaryTree(r1)
-# r2 = NodeBT(6, NodeBT(5), NodeBT(8))
-# t2 = BinaryTree(r2)
-# print("ssssss")
-# t1.root.print_tree()
-# print("ssssss")
-# t2.root.print_tree()
+r1 = NodeBT(2, NodeBT(1), NodeBT(3))
+t1 = BinaryTree(r1)
 
 
-# r = NodeBT(4)
-# t = tree_merge(r, t1, t2)
+r2 = NodeBT(6, NodeBT(5), NodeBT(8))
+t2 = BinaryTree(r2)
 
-# print("root cargo = ", t.root.cargo)
-# print("tree total = ", t.tree_sum)
+
+print("ssssss")
+t1.root.print_tree()
+print("ssssss")
+t2.root.print_tree()
+print("ssssss")
+
+r = NodeBT(4)
+t = tree_merge(r, t1, t2)
+
+t.root.print_tree()
+
+print("root cargo = ", t.root.cargo)
+print("tree total = ", t.tree_sum)
 
 
     

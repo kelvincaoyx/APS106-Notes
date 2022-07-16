@@ -193,6 +193,7 @@ class Node:
         self.cargo = c 
         self.priority = p 
         self.next = None 
+        
 class LinkedList: 
     def __init__(self):
         '''Create a linked list, i.e., an object of type 
@@ -259,6 +260,7 @@ class LinkedList:
             self.insert_in_front(cargo,priority)
             self.length += 1
             return
+        
         else:   
             current = self.head
             

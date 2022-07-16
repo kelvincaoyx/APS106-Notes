@@ -46,8 +46,11 @@ THE ENGINEERS!!!
 1000
 
 '''
+from calendar import c
 from itertools import count
+from platform import node
 import re
+from this import d
 
 
 def fun1(n):
@@ -150,10 +153,10 @@ class Node:
         self.next = None
         
 class Stack:
-    def __init__(self):
+    def __init__(self,length=0,head=None):
         '''Initialize a Stack'''
-        self.length = 0 # the number of elements in the Stack
-        self.head = None
+        self.length = length # the number of elements in the Stack
+        self.head = head
     
     def is_empty(self):
         '''(Stack) -> bool
@@ -161,6 +164,7 @@ class Stack:
         '''
         if self.head == None:
             return True
+        
         return False
     
     def peek(self):
@@ -173,16 +177,30 @@ class Stack:
         
         return self.head.cargo
     
+
+
     def pop(self):
         '''(Stack) -> the type of the cargo or NoneType
         Output: Remove the first element of the Stack and return the
         cargo. Return None if the Stack is empty. Update self.length
+        
+        one = Node()
+        two = Node()
+        three = Node()
+        
+        
+        one = Node() -> None
+        
+        
+        two = Node()
+        three = Node()
         '''
+        
         if self.is_empty():
             return None
         
         current = self.head
-        self.head = self.head.next
+        self.head = current.next
         
         current.next = None
         
@@ -193,7 +211,7 @@ class Stack:
     def __str__(self):
         current = self.head
         
-        while current != None:
+        while current is not None:
             print(current.cargo)
             current = current.next
     
@@ -205,24 +223,28 @@ class Stack:
         new = Node()
         new.cargo = cargo
         new.next = self.head
+        
         self.head = new
         self.length += 1
 
     
-# one = Node()
-# two = Node()
-# three = Node()
+one = Node()
+two = Node()
+three = Node()
 
-# one.cargo = 1
-# two.cargo = 2
-# three.cargo = 3
+one.cargo = 1
+two.cargo = 2
+three.cargo = 3
 
-# one.next = two
-# two.next = three
+one.next = two
+two.next = three
 
-# s = Stack()
-# s.length = 3
-# s.head = one
+s = Stack()
+
+s.length = 3
+s.head = one
+
+print(s.peek())
 
 # s.__str__()
 
@@ -308,4 +330,4 @@ def percent_correct(predictions, labels):
         
     return trueCounter/total *100
 
-print(percent_correct(predictions, labels))
+#print(percent_correct(predictions, labels))
